@@ -3,7 +3,10 @@ This repository holds all of the different types of example env0.yml files you m
 
 ## File Structure
 Root:
-Types of Integrations (Security, Budget, Performance, Management, Etc)
+Types of Integrations (Security, Budget, Performance, Management, Approval, Etc)
 
 Example:
 Root/Security/Terrascan/env0.yml
+
+Update:
+2021/08/31 - Zapier Manual Approval example
