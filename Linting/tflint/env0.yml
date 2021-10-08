@@ -10,5 +10,5 @@ deploy:
         - tflint --init
 
     terraformInit:
-      before:
-        - tflint
+      after:
+        - tflint 1>&2
