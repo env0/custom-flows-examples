@@ -9,6 +9,8 @@ Example:
 Root/Security/Terrascan/env0.yml
 
 Update:
-2021/08/31 - Zapier Manual Approval example
+2021/10/21 - Cloudrail example
+
 2021/09/30 - tflint example
 
+2021/08/31 - Zapier Manual Approval example
