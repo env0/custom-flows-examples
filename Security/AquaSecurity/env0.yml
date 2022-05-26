@@ -1,0 +1,16 @@
+version: 1
+
+deploy:
+  steps:
+    setupVariables:
+      after:
+        - curl -L -o tfsec https://github.com/aquasecurity/tfsec/releases/download/v1.21.2/tfsec-linux-amd64
+        - chmod 755 ./tfsec
+        - ./tfsec --version
+    terraformInit:
+      before:
+        - echo "running tfsec"
+        - ./tfsec
+    terraformPlan:
+      after:
+        # - terraform show -json .tf-plan > tf-plan.json
