@@ -2,22 +2,15 @@ version: 1
 
 deploy:
   steps:
-    terraformPlan:
-      before:
-        # option A retrieving key through a script - e.g. copy from aws s3 or aws ssm get-parameters
-        - echo MY_PRIVATE_KEY=$(aws s3 cp s3://mybucket/mykey -)
-        # option B using Environment Variables in the env0 UI, marked as sensitive, base64 encoded (optional). [^1]
-        # echo MY_PRIVATE_KEY=$(echo -n $MY_B64_ENCODED_KEY | base64 -d) >> $ENV0_ENV   
-    terraformApply:
-      after:
-        - pip3 install --user ansible
     terraformOutput:
       after:
+        # Configure private key
+        # option A retrieving key through a script - e.g. copy from aws s3 or aws ssm get-parameters
+        - aws s3 cp s3://mybucket/mykey /tmp/id_rsa
+        # option B using Environment Variables in the env0 UI, marked as sensitive, base64 encoded (recommended)
+        # echo -n $MY_B64_ENCODED_KEY | base64 -d >> /tmp/id_rsa
+        - chmod 400 /tmp/id_rsa
+        - pip3 install --user ansible
         - export PATH=$PATH:$(python3 -m site --user-base)/bin
         - terraform output -raw instance_public_dns >> inventory
-        - ansible-playbook -i inventory --private-key ${MY_PRIVATE_KEY} --ssh-common-args='-F .ssh/config' configure.yml
-        # option B using Environment Variables in the env0 UI, marked as sensitive, base64 encoded (optional).
-        # - ansible-playbook -i inventory --private-key ${$MY_PRIVATE_KEY} --ssh-common-args='-F .ssh/config' configure.yml
-
-
-# [^1] see also: https://docs.env0.com/docs/custom-flows#exporting-your-own-environment-variables
+        - ansible-playbook -i inventory --private-key /tmp/id_rsa --ssh-common-args='-F .ssh/config' configure.yml
