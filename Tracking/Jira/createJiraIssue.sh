@@ -8,7 +8,7 @@ if [[ -z $USER || -z $PASSWORD ]]; then
 fi
 
 if [[ -z $PROJECT_KEY ]]; then
-  echo "Please set PROJECT_KEY (hint see URL after ...jira/core/projects/PROJECT_KEY/board...) "
+  echo "Please set PROJECT_ID (hint see URL after ...jira/core/projects/PROJECT_KEY/board...) "
   exit 1
 fi
 
@@ -32,7 +32,7 @@ curl -u $USER:$PASSWORD -X POST -H \
         \"id\": \"$ISSUE_TYPE\"
       },
       \"project\": {
-        \"id\": \"$PROJECT_ID\"
+        \"key\": \"$PROJECT_KEY\"
       }
     }
   }"
