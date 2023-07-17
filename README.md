@@ -9,6 +9,8 @@ Example:
 Root/Security/Terrascan/env0.yml
 
 Update:
+2023/07/17 - Git Token example (misc)
+
 2022/01/27 - Checkov example
 
 2021/10/21 - Cloudrail example
