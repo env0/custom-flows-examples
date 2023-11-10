@@ -66,3 +66,4 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = [var.ssh_cidr_block]
   }
 }
+
