@@ -1,0 +1,17 @@
+version: 2
+
+deploy:
+  steps:
+    setupVariables:
+      after:
+        - name: Option 1 Configure AWS Profiles
+          run: |
+            mkdir ~/.aws
+            cat > ~/.aws/config << EOL
+            [profile profile_name]
+            role_arn = arn:aws:iam::123456789012:role/role-name
+            EOL
+        # - name: Option 2 Copy Credentials 
+        #   run: |
+        #     mkdir ~/.aws
+        #     aws s3 cp s3://mybucket/mycreds ~/.aws/credentials
