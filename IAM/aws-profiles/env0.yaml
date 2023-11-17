@@ -6,6 +6,7 @@ deploy:
       after:
         - name: Option 1 Configure AWS Profiles
           run: |
+            mkdir ~/.aws
             cat > ~/.aws/config << EOL
             [profile profile_name]
             role_arn = arn:aws:iam::123456789012:role/role-name
