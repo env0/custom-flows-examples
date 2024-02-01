@@ -1,0 +1,20 @@
+version: 2
+
+deploy:
+  steps:
+    setupVariables:
+      after:
+        - name: Setup TFC Token 
+          run: |
+            # fetch token from 3rd party secret solution
+            # token=$(fetch secret ...)
+            # option 1
+            echo "TFC_TOKEN_api_terraform_io=${token}" >> $ENV0_ENV
+            # option 2
+            cat > ~/.terraform.d/credentials.tfrc.json << EOL
+            {
+              "credentials": {
+                "app.terraform.io": {
+                  "token": "${token}"
+                }
+            } 
